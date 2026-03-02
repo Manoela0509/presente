@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Joguinho 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Capture Meu Amor 💖</title>
 
 <style>
 body {
@@ -16,19 +18,21 @@ body {
 
 h1 {
     margin-top: 30px;
-    font-size: 40px;
+    font-size: 32px;
+    padding: 0 15px;
 }
 
 #score {
-    font-size: 22px;
+    font-size: 18px;
     margin-top: 10px;
 }
 
 .heart {
     position: absolute;
-    font-size: 30px;
+    font-size: 50px;
     cursor: pointer;
     animation: fall linear forwards;
+    user-select: none;
 }
 
 @keyframes fall {
@@ -38,7 +42,7 @@ h1 {
 
 #loveBarContainer {
     width: 80%;
-    height: 25px;
+    height: 20px;
     background: rgba(255,255,255,0.3);
     margin: 20px auto;
     border-radius: 20px;
@@ -54,8 +58,8 @@ h1 {
 
 #surprise {
     display: none;
-    font-size: 30px;
-    margin-top: 20px;
+    font-size: 22px;
+    margin: 20px;
     animation: fadeIn 2s forwards;
 }
 
@@ -76,8 +80,8 @@ h1 {
 </div>
 
 <div id="surprise">
-    💖 Surpresa desbloqueada! 💖 <br>
-    Você ganhou um abraço infinito!
+    💖 Surpresa desbloqueada! 💖 <br><br>
+    Você ganhou meu amor infinito! 🤍
 </div>
 
 <script>
@@ -88,10 +92,10 @@ function createHeart() {
     heart.classList.add("heart");
     heart.innerHTML = "💖";
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.left = Math.random() * 90 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
 
-    heart.onclick = function() {
+    function collectHeart() {
         score++;
         document.getElementById("score").innerText = "Amor coletado: " + score;
 
@@ -104,16 +108,19 @@ function createHeart() {
         }
 
         heart.remove();
-    };
+    }
+
+    heart.addEventListener("click", collectHeart);
+    heart.addEventListener("touchstart", collectHeart);
 
     document.body.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 6000);
+    }, 5000);
 }
 
-setInterval(createHeart, 800);
+setInterval(createHeart, 900);
 </script>
 
 </body>
