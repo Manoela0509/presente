@@ -1,91 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Algo Especial 💖</title>
+<title>Uma Surpresa 💖</title>
 
 <style>
 body {
-  margin:0;
-  font-family: Arial;
-  text-align:center;
-  background: linear-gradient(45deg, #ffd6e8, #ffeaf4);
-  padding-top:80px;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff9ecf, #ff5ea8);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    overflow: hidden;
 }
 
-.container {
-  max-width:600px;
-  margin:auto;
-}
-
-input, button {
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  margin:10px;
-  font-size:16px;
+h1 {
+    margin-top: 80px;
+    font-size: 40px;
+    animation: fadeIn 2s ease-in-out;
 }
 
 button {
-  background:#ff4da6;
-  color:white;
-  cursor:pointer;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    color: #ff5ea8;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
 }
 
-.hidden {
-  display:none;
+button:hover {
+    transform: scale(1.1);
 }
 
-img {
-  width:250px;
-  border-radius:20px;
-  margin:10px;
+#mensagem {
+    margin-top: 20px;
+    font-size: 22px;
+    display: none;
+}
+
+#gameArea {
+    margin-top: 40px;
+    height: 200px;
+    position: relative;
+}
+
+.heart {
+    position: absolute;
+    font-size: 30px;
+    cursor: pointer;
+    animation: float 4s linear infinite;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes float {
+    from {transform: translateY(200px);}
+    to {transform: translateY(-200px);}
 }
 </style>
-
-<script>
-function mostrarMensagem() {
-  var nome = document.getElementById("nome").value;
-  
-  if(nome.trim() === "") {
-    alert("Digite seu nome primeiro 💕");
-    return;
-  }
-
-  document.getElementById("saudacao").innerHTML = 
-    "Olá, " + nome + " 💖";
-
-  document.getElementById("mensagem").style.display = "block";
-}
-</script>
 </head>
 
 <body>
 
-<div class="container">
+<h1>Você encontrou algo especial 💕</h1>
 
-<h1>Digite seu nome para desbloquear 💌</h1>
+<button onclick="mostrarMensagem()">Clique aqui 💌</button>
 
-<input type="text" id="nome" placeholder="Seu nome">
-<br>
-<button onclick="mostrarMensagem()">Desbloquear</button>
-
-<div id="mensagem" class="hidden">
-
-<h2 id="saudacao"></h2>
-
-<p>
-Você é a melhor parte dos meus dias.
-Eu escolheria você mil vezes.
-Obrigada por existir na minha vida 💕
-</p>
-
-<img src="LINK_DA_FOTO_1">
-<img src="LINK_DA_FOTO_2">
-
+<div id="mensagem">
+    Você é a melhor parte dos meus dias 💖✨
 </div>
 
-</div>
+<h2>Pegue 5 corações para desbloquear a surpresa! 🎮</h2>
+
+<div id="gameArea"></div>
+
+<script>
+function mostrarMensagem() {
+    document.getElementById("mensagem").style.display = "block";
+}
+
+let pontos = 0;
+
+function criarCoracao() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 90 + "%";
+
+    heart.onclick = function() {
+        pontos++;
+        heart.remove();
+
+        if (pontos === 5) {
+            alert("💍 Surpresa desbloqueada! Você ganhou um beijo virtual 😘");
+        }
+    };
+
+    document.getElementById("gameArea").appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
+}
+
+setInterval(criarCoracao, 1000);
+</script>
 
 </body>
 </html>
