@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Algo Especial 💖</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  text-align:center;
+  background: linear-gradient(45deg, #ffd6e8, #ffeaf4);
+  padding-top:80px;
+}
+
+.container {
+  max-width:600px;
+  margin:auto;
+}
+
+input, button {
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  margin:10px;
+  font-size:16px;
+}
+
+button {
+  background:#ff4da6;
+  color:white;
+  cursor:pointer;
+}
+
+.hidden {
+  display:none;
+}
+
+img {
+  width:250px;
+  border-radius:20px;
+  margin:10px;
+}
+</style>
+
+<script>
+function mostrarMensagem() {
+  var nome = document.getElementById("nome").value;
+  
+  if(nome.trim() === "") {
+    alert("Digite seu nome primeiro 💕");
+    return;
+  }
+
+  document.getElementById("saudacao").innerHTML = 
+    "Olá, " + nome + " 💖";
+
+  document.getElementById("mensagem").style.display = "block";
+}
+</script>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Digite seu nome para desbloquear 💌</h1>
+
+<input type="text" id="nome" placeholder="Seu nome">
+<br>
+<button onclick="mostrarMensagem()">Desbloquear</button>
+
+<div id="mensagem" class="hidden">
+
+<h2 id="saudacao"></h2>
+
+<p>
+Você é a melhor parte dos meus dias.
+Eu escolheria você mil vezes.
+Obrigada por existir na minha vida 💕
+</p>
+
+<img src="LINK_DA_FOTO_1">
+<img src="LINK_DA_FOTO_2">
+
+</div>
+
+</div>
+
+</body>
+</html>
