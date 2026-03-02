@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Capture Meu Amor 💖</title>
+<title>Nosso Amor 💖</title>
 
 <style>
 body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     text-align: center;
     color: white;
 }
 
+/* ===== TELA DO JOGO ===== */
+#gameScreen {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    height: 100vh;
+}
+
 h1 {
-    margin-top: 30px;
-    font-size: 32px;
-    padding: 0 15px;
+    padding-top: 30px;
+    font-size: 28px;
 }
 
 #score {
@@ -40,30 +43,29 @@ h1 {
     to { transform: translateY(110vh); }
 }
 
-#loveBarContainer {
-    width: 80%;
-    height: 20px;
-    background: rgba(255,255,255,0.3);
-    margin: 20px auto;
-    border-radius: 20px;
-}
-
-#loveBar {
-    height: 100%;
-    width: 0%;
-    background: red;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-
-#surprise {
+/* ===== TELA FINAL ===== */
+#finalScreen {
     display: none;
-    font-size: 22px;
-    margin: 20px;
-    animation: fadeIn 2s forwards;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    padding: 40px 20px;
 }
 
-@keyframes fadeIn {
+#finalScreen h2 {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+#finalScreen p {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.fadeIn {
+    animation: fade 2s ease-in-out forwards;
+}
+
+@keyframes fade {
     from { opacity: 0; }
     to { opacity: 1; }
 }
@@ -72,22 +74,28 @@ h1 {
 
 <body>
 
-<h1>Capture os Corações 💕</h1>
-<div id="score">Amor coletado: 0</div>
-
-<div id="loveBarContainer">
-    <div id="loveBar"></div>
+<!-- ===== JOGO ===== -->
+<div id="gameScreen">
+    <h1>Capture 20 Corações 💕</h1>
+    <div id="score">Amor coletado: 0 / 20</div>
 </div>
 
-<div id="surprise">
-    💖 Surpresa desbloqueada! 💖 <br><br>
-    Você ganhou meu amor infinito! 🤍
+<!-- ===== TELA FINAL ===== -->
+<div id="finalScreen">
+    <h2 class="fadeIn">💖 Surpresa Desbloqueada 💖</h2>
+    <p class="fadeIn">
+        Você coletou todos os meus corações... <br><br>
+        Mas a verdade é que todos eles já eram seus. <br><br>
+        Eu te amo infinitamente 💕
+    </p>
 </div>
 
 <script>
 let score = 0;
 
 function createHeart() {
+    if (score >= 20) return;
+
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "💖";
@@ -97,14 +105,12 @@ function createHeart() {
 
     function collectHeart() {
         score++;
-        document.getElementById("score").innerText = "Amor coletado: " + score;
+        document.getElementById("score").innerText = 
+            "Amor coletado: " + score + " / 20";
 
-        let percentage = score * 5;
-        if (percentage > 100) percentage = 100;
-        document.getElementById("loveBar").style.width = percentage + "%";
-
-        if (percentage >= 100) {
-            document.getElementById("surprise").style.display = "block";
+        if (score >= 20) {
+            document.getElementById("gameScreen").style.display = "none";
+            document.getElementById("finalScreen").style.display = "block";
         }
 
         heart.remove();
@@ -113,7 +119,7 @@ function createHeart() {
     heart.addEventListener("click", collectHeart);
     heart.addEventListener("touchstart", collectHeart);
 
-    document.body.appendChild(heart);
+    document.getElementById("gameScreen").appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
